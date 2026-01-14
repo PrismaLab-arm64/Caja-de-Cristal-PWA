@@ -26,6 +26,9 @@ class CajaDeCristalApp {
 
         console.log('🚀 Initializing Caja de Cristal...');
 
+        // Initialize sound system
+        sounds.init();
+
         // Initialize database
         await db.init();
 
@@ -75,34 +78,41 @@ class CajaDeCristalApp {
     setupEventListeners() {
         // Navigation toggle
         document.getElementById('nav-toggle').addEventListener('click', () => {
+            sounds.playClick();
             document.getElementById('sidebar').classList.add('active');
         });
 
         document.getElementById('sidebar-close').addEventListener('click', () => {
+            sounds.playClick();
             document.getElementById('sidebar').classList.remove('active');
         });
 
         // Nueva transacción
         document.getElementById('btn-nueva-transaccion')?.addEventListener('click', () => {
+            sounds.playClick();
             this.showTransaccionModal();
         });
 
         // Nuevo socio
         document.getElementById('btn-nuevo-socio')?.addEventListener('click', () => {
+            sounds.playClick();
             this.showSocioModal();
         });
 
         // Generar reporte
         document.getElementById('btn-generar-reporte')?.addEventListener('click', () => {
+            sounds.playClick();
             this.generateReport();
         });
 
         // Backup
         document.getElementById('btn-exportar')?.addEventListener('click', () => {
+            sounds.playClick();
             this.exportBackup();
         });
 
         document.getElementById('btn-importar')?.addEventListener('click', () => {
+            sounds.playClick();
             document.getElementById('file-importar').click();
         });
 
@@ -112,10 +122,12 @@ class CajaDeCristalApp {
 
         // Filters
         document.getElementById('filter-tipo')?.addEventListener('change', () => {
+            sounds.playClick();
             this.refreshTransacciones();
         });
 
         document.getElementById('filter-mes')?.addEventListener('change', () => {
+            sounds.playClick();
             this.refreshTransacciones();
         });
 
@@ -126,6 +138,7 @@ class CajaDeCristalApp {
         // Close modal on overlay click
         document.getElementById('modal-overlay').addEventListener('click', (e) => {
             if (e.target.id === 'modal-overlay') {
+                sounds.playClick();
                 this.closeModal();
             }
         });
@@ -136,6 +149,7 @@ class CajaDeCristalApp {
         menuItems.forEach(item => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
+                sounds.playNavigate();
                 const view = item.getAttribute('data-view');
                 this.navigateTo(view);
             });
@@ -450,6 +464,15 @@ class CajaDeCristalApp {
         toast.textContent = message;
 
         document.getElementById('toast-container').appendChild(toast);
+
+        // Play sound based on type
+        if (type === 'success') {
+            sounds.playSuccess();
+        } else if (type === 'error') {
+            sounds.playError();
+        } else {
+            sounds.playClick();
+        }
 
         setTimeout(() => {
             toast.style.opacity = '0';

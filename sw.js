@@ -3,11 +3,12 @@
    Caja de Cristal PWA v1.0.0
    ============================================ */
 
-const CACHE_NAME = 'caja-de-cristal-v1.1.1';
+const CACHE_NAME = 'caja-de-cristal-v1.1.4';
 const urlsToCache = [
     './',
     './index.html',
     './css/style.css',
+    './js/sounds.js',
     './js/app.js',
     './js/constants.js',
     './js/db.js',

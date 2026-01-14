@@ -93,13 +93,13 @@
                 </div>
 
                 <div class="action-buttons">
-                    <button class="btn-primary" onclick="app.navigateTo('transacciones')">
+                    <button class="btn-primary" onclick="sounds.playClick(); app.navigateTo('transacciones')">
                         💰 Nueva Transacción
                     </button>
-                    <button class="btn-secondary" onclick="app.navigateTo('socios')">
+                    <button class="btn-secondary" onclick="sounds.playClick(); app.navigateTo('socios')">
                         👥 Gestionar Socios
                     </button>
-                    <button class="btn-secondary" onclick="app.navigateTo('reportes')">
+                    <button class="btn-secondary" onclick="sounds.playClick(); app.navigateTo('reportes')">
                         📄 Generar Reporte
                     </button>
                 </div>
@@ -199,6 +199,7 @@
     <div id="toast-container" class="toast-container"></div>
 
     <!-- Scripts -->
+    <script src="js/sounds.js"></script>
     <script src="js/constants.js"></script>
     <script src="js/db.js"></script>
     <script src="js/utils.js"></script>
