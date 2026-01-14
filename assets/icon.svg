@@ -1,10 +1,30 @@
 <svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#00d9ff;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#7b61ff;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#003366;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0066cc;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="512" height="512" fill="#1a1a1a"/>
-  <text x="256" y="340" font-size="280" text-anchor="middle" fill="url(#grad)">💎</text>
+  <!-- Fondo -->
+  <rect width="512" height="512" fill="url(#grad)"/>
+  
+  <!-- Escudo exterior -->
+  <path d="M 256 80 L 400 120 L 400 280 Q 400 380 256 440 Q 112 380 112 280 L 112 120 Z" 
+        fill="none" stroke="#ffffff" stroke-width="12" opacity="0.9"/>
+  
+  <!-- Escudo interior -->
+  <path d="M 256 100 L 380 135 L 380 270 Q 380 360 256 415 Q 132 360 132 270 L 132 135 Z" 
+        fill="#ffffff" opacity="0.15"/>
+  
+  <!-- Eslabón izquierdo -->
+  <ellipse cx="200" cy="256" rx="40" ry="55" 
+           fill="none" stroke="#ffffff" stroke-width="16" opacity="0.95"/>
+  
+  <!-- Eslabón derecho -->
+  <ellipse cx="312" cy="256" rx="40" ry="55" 
+           fill="none" stroke="#ffffff" stroke-width="16" opacity="0.95"/>
+  
+  <!-- Brillo -->
+  <ellipse cx="220" cy="200" rx="30" ry="20" 
+           fill="#ffffff" opacity="0.3"/>
 </svg>

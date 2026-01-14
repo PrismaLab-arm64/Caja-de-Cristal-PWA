@@ -10,8 +10,8 @@
     <meta name="mobile-web-app-capable" content="yes">
     
     <link rel="manifest" href="manifest.json">
-    <link rel="icon" type="image/png" href="assets/icon.png">
-    <link rel="apple-touch-icon" href="assets/icon.png">
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="apple-touch-icon" href="assets/icon.svg">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Caja de Cristal">
     
@@ -22,20 +22,38 @@
 </head>
 <body>
 
+    <!-- LOGIN SCREEN -->
+    <div id="login-screen" class="login-screen active">
+        <div class="login-content">
+            <div class="login-logo-container">
+                <img src="assets/icon.svg" alt="Caja de Cristal" class="login-logo">
+            </div>
+            <h1 class="login-title">Caja de Cristal</h1>
+            <p class="login-subtitle">SISTROVIAL.LEGAL</p>
+            <p class="login-description">Sistema de Tesorería Profesional</p>
+            
+            <form id="login-form" class="login-form">
+                <input type="password" id="login-pin" class="login-input" placeholder="PIN de acceso" maxlength="4" inputmode="numeric" required>
+                <button type="submit" class="btn-login">Ingresar</button>
+            </form>
+            
+            <p class="login-hint">PIN por defecto: 1234</p>
+            <p class="login-footer">© 2026 - Desarrollado por Ing. John A. Skinner S.</p>
+        </div>
+    </div>
+
     <!-- SPLASH SCREEN -->
-    <div id="splash-screen" class="splash-screen active">
+    <div id="splash-screen" class="splash-screen">
         <div class="splash-content">
             <div class="splash-logo-container">
-                <div class="splash-logo">💎</div>
+                <img src="assets/icon.svg" alt="Caja de Cristal" class="splash-logo-img">
                 <div class="splash-glow"></div>
             </div>
             <h1 class="splash-title">Caja de Cristal</h1>
-            <p class="splash-subtitle">Sistema de Tesorería Profesional</p>
+            <p class="splash-subtitle">Cargando...</p>
             <div class="splash-loader">
                 <div class="splash-loader-bar"></div>
             </div>
-            <p class="splash-author">by Ing. John A. Skinner S.</p>
-            <p class="splash-footer">© 2026 SISTROVIAL.LEGAL - v1.0.0</p>
         </div>
     </div>
 
@@ -201,6 +219,7 @@
     <div id="toast-container" class="toast-container"></div>
 
     <!-- Scripts -->
+    <script src="js/constants.js"></script>
     <script src="js/db.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/pdf.js"></script>

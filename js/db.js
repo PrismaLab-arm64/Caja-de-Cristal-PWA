@@ -32,8 +32,9 @@ class Database {
                         autoIncrement: true
                     });
                     transaccionesStore.createIndex('tipo', 'tipo', { unique: false });
-                    transaccionesStore.createIndex('fecha', 'fecha', { unique: false });
+                    transaccionesStore.createIndex('fechaFactura', 'fechaFactura', { unique: false });
                     transaccionesStore.createIndex('mes', 'mes', { unique: false });
+                    transaccionesStore.createIndex('estado', 'estado', { unique: false });
                 }
 
                 if (!db.objectStoreNames.contains('socios')) {
@@ -63,7 +64,11 @@ class Database {
         
         // Añadir metadata
         transaccion.createdAt = new Date().toISOString();
-        transaccion.mes = transaccion.fecha.substring(0, 7); // YYYY-MM
+        transaccion.mes = transaccion.fechaFactura ? transaccion.fechaFactura.substring(0, 7) : new Date().toISOString().substring(0, 7); // YYYY-MM
+        
+        // Campos por defecto si no existen
+        if (!transaccion.estado) transaccion.estado = 'Completado';
+        if (!transaccion.fechaRecaudo) transaccion.fechaRecaudo = null;
 
         return new Promise((resolve, reject) => {
             const request = store.add(transaccion);

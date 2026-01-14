@@ -1,12 +1,25 @@
 /* ============================================
    APP - Main Application Logic
-   Caja de Cristal PWA
+   Caja de Cristal PWA v1.1.0
    ============================================ */
+
+// Avatar URLs
+const AVATARS = {
+    'avatar1': 'https://www.genspark.ai/api/files/s/mCiinVjN',
+    'avatar2': 'https://www.genspark.ai/api/files/s/2wlTnIKZ',
+    'avatar3': 'https://www.genspark.ai/api/files/s/Q69eYfDq',
+    'avatar4': 'https://www.genspark.ai/api/files/s/EGphjNSN',
+    'avatar5': 'https://www.genspark.ai/api/files/s/g4AanUit',
+    'avatar6': 'https://www.genspark.ai/api/files/s/nE2yrdCp',
+    'avatar7': 'https://www.genspark.ai/api/files/s/lJHBDEqq',
+    'avatar8': 'https://www.genspark.ai/api/files/s/UxQ1nCJf'
+};
 
 class CajaDeCristalApp {
     constructor() {
         this.currentView = 'dashboard';
         this.initialized = false;
+        this.isLoggedIn = false;
     }
 
     async init() {
@@ -14,41 +27,76 @@ class CajaDeCristalApp {
 
         console.log('🚀 Initializing Caja de Cristal...');
 
+        // Setup login
+        this.setupLogin();
+
         // Initialize database
         await db.init();
 
-        // Initialize socios por defecto si no existen
+        // Initialize socios fijos
         await this.initDefaultSocios();
 
         // Setup UI
         this.setupEventListeners();
         this.setupNavigation();
 
-        // Hide splash, show app
-        setTimeout(() => {
-            document.getElementById('splash-screen').classList.remove('active');
-            document.getElementById('app').style.display = 'block';
-            this.refreshDashboard();
-        }, 2000);
-
         this.initialized = true;
         console.log('✅ App initialized');
+    }
+
+    setupLogin() {
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const pin = document.getElementById('login-pin').value;
+            
+            // PIN por defecto: 1234
+            if (pin === '1234') {
+                this.isLoggedIn = true;
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('splash-screen').classList.add('active');
+                
+                setTimeout(() => {
+                    document.getElementById('splash-screen').classList.remove('active');
+                    document.getElementById('app').style.display = 'block';
+                    this.refreshDashboard();
+                }, 1500);
+            } else {
+                this.showToast('PIN incorrecto', 'error');
+                document.getElementById('login-pin').value = '';
+            }
+        });
     }
 
     async initDefaultSocios() {
         const socios = await db.getSocios();
         if (socios.length === 0) {
-            // Crear 3 socios principales
+            // 3 Socios fijos
             const defaultSocios = [
-                { nombre: 'John Skinner', avatar: '👨‍💼', deuda: 0 },
-                { nombre: 'María González', avatar: '👩‍💼', deuda: 0 },
-                { nombre: 'Carlos Rodríguez', avatar: '👨‍💻', deuda: 0 }
+                { 
+                    nombre: 'Dr. Ángel Peralta', 
+                    avatar: AVATARS.avatar5,
+                    deuda: 0,
+                    fijo: true
+                },
+                { 
+                    nombre: 'Dra. Andrea Cano', 
+                    avatar: AVATARS.avatar1,
+                    deuda: 0,
+                    fijo: true
+                },
+                { 
+                    nombre: 'Dra. Sandra Herrera', 
+                    avatar: AVATARS.avatar2,
+                    deuda: 0,
+                    fijo: true
+                }
             ];
 
             for (const socio of defaultSocios) {
                 await db.addSocio(socio);
             }
-            console.log('✅ Default socios created');
+            console.log('✅ Default socios creados');
         }
     }
 
@@ -172,16 +220,17 @@ class CajaDeCristalApp {
         } else {
             recentList.innerHTML = recent.slice(0, 5).map(t => `
                 <div class="transaction-item">
-                    <div style="display:flex; justify-content:space-between;">
-                        <div>
+                    <div style="display:flex; justify-content:space-between; align-items:start;">
+                        <div style="flex:1;">
                             <strong>${t.concepto}</strong>
-                            <p style="color:var(--text-secondary); font-size:0.9rem;">${t.categoria} • ${t.fecha}</p>
+                            <p style="color:var(--text-secondary); font-size:0.9rem;">${t.categoria} • ${t.fechaFactura}</p>
+                            <p style="color:var(--text-secondary); font-size:0.85rem;">Estado: ${t.estado || 'Completado'}</p>
                         </div>
                         <div style="text-align:right;">
-                            <strong style="color:${t.tipo === 'ingreso' ? 'var(--success)' : 'var(--danger)'}">
+                            <strong style="color:${t.tipo === 'ingreso' ? 'var(--success)' : 'var(--danger)'}; font-size:1.1rem;">
                                 ${t.tipo === 'ingreso' ? '+' : '-'}${this.formatMoney(t.monto)}
                             </strong>
-                            <p style="font-size:0.8rem; color:var(--text-secondary);">${t.metodoPago || ''}</p>
+                            <p style="font-size:0.8rem; color:var(--text-secondary);">${t.metodoPago || 'N/A'}</p>
                         </div>
                     </div>
                 </div>
@@ -205,10 +254,14 @@ class CajaDeCristalApp {
             list.innerHTML = transacciones.map(t => `
                 <div class="transaction-item" onclick="app.showTransaccionModal(${t.id})">
                     <div style="display:flex; justify-content:space-between; align-items:center;">
-                        <div>
+                        <div style="flex:1;">
                             <strong>${t.concepto}</strong>
                             <p style="color:var(--text-secondary); font-size:0.9rem;">
-                                ${t.categoria} • ${t.fecha} • ${t.metodoPago || 'N/A'}
+                                ${t.categoria} • Factura: ${t.fechaFactura}
+                                ${t.fechaRecaudo ? ` • Recaudo: ${t.fechaRecaudo}` : ''}
+                            </p>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">
+                                ${t.metodoPago || 'N/A'} • Estado: ${t.estado || 'Completado'}
                             </p>
                         </div>
                         <strong style="color:${t.tipo === 'ingreso' ? 'var(--success)' : 'var(--danger)'}; font-size:1.2rem;">
@@ -229,16 +282,17 @@ class CajaDeCristalApp {
         } else {
             list.innerHTML = socios.map(s => `
                 <div class="socio-card" onclick="app.showSocioModal(${s.id})">
-                    <div style="font-size:3rem; text-align:center; margin-bottom:10px;">
-                        ${s.avatar || '👤'}
+                    <div style="text-align:center; margin-bottom:15px;">
+                        <img src="${s.avatar}" alt="${s.nombre}" style="width:100px; height:100px; border-radius:50%; object-fit:cover;">
                     </div>
                     <h3 style="text-align:center; margin-bottom:10px;">${s.nombre}</h3>
+                    ${s.fijo ? '<p style="text-align:center; font-size:0.8rem; color:var(--accent-primary); margin-bottom:10px;">⭐ Socio Principal</p>' : ''}
                     <div style="text-align:center;">
                         <div style="font-size:0.9rem; color:var(--text-secondary);">Deuda</div>
-                        <div style="font-size:1.5rem; font-weight:700; color:${s.deuda > 0 ? 'var(--danger)' : 'var(--success)'}">
+                        <div style="font-size:1.5rem; font-weight:700; color:${s.deuda > 0 ? 'var(--danger)' : 'var(--success)'}; margin:10px 0;">
                             ${this.formatMoney(s.deuda || 0)}
                         </div>
-                        <div style="margin-top:10px; padding:5px 10px; background:${this.getSemaforoColor(s.deuda)}; border-radius:15px; display:inline-block;">
+                        <div style="margin-top:10px; padding:8px 15px; background:${this.getSemaforoColor(s.deuda)}; border-radius:20px; display:inline-block; font-size:0.9rem;">
                             ${this.getSemaforoLabel(s.deuda)}
                         </div>
                     </div>
@@ -289,13 +343,26 @@ class CajaDeCristalApp {
                 </select>
                 <input type="text" name="concepto" class="form-input" placeholder="Concepto" required>
                 <input type="number" name="monto" class="form-input" placeholder="Monto" required>
-                <input type="date" name="fecha" class="form-input" required>
+                
+                <label style="font-size:0.9rem; color:var(--text-secondary); margin-top:10px;">Fecha de Factura:</label>
+                <input type="date" name="fechaFactura" class="form-input" required>
+                
+                <label style="font-size:0.9rem; color:var(--text-secondary); margin-top:10px;">Fecha de Recaudo:</label>
+                <input type="date" name="fechaRecaudo" class="form-input">
+                
                 <select name="metodoPago" class="form-input">
                     <option value="Efectivo">Efectivo</option>
                     <option value="Transferencia">Transferencia</option>
                     <option value="Cheque">Cheque</option>
                     <option value="Tarjeta">Tarjeta</option>
                 </select>
+                
+                <select name="estado" class="form-input" required>
+                    <option value="Completado">Completado</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Abono Parcial">Abono Parcial</option>
+                </select>
+                
                 <div style="display:flex; gap:10px; margin-top:20px;">
                     <button type="submit" class="btn-primary" style="flex:1;">Guardar</button>
                     <button type="button" class="btn-secondary" onclick="app.closeModal()">Cancelar</button>
@@ -314,9 +381,10 @@ class CajaDeCristalApp {
             categoria: form.categoria.value,
             concepto: form.concepto.value,
             monto: parseFloat(form.monto.value),
-            fecha: form.fecha.value,
+            fechaFactura: form.fechaFactura.value,
+            fechaRecaudo: form.fechaRecaudo.value || null,
             metodoPago: form.metodoPago.value,
-            estado: 'completado'
+            estado: form.estado.value
         };
 
         if (id) {
@@ -333,11 +401,23 @@ class CajaDeCristalApp {
     }
 
     showSocioModal(id = null) {
+        const avatarOptions = Object.entries(AVATARS).map(([key, url]) => 
+            `<div class="avatar-option" onclick="app.selectAvatar('${url}')">
+                <img src="${url}" alt="${key}" style="width:60px; height:60px; border-radius:50%; cursor:pointer;">
+            </div>`
+        ).join('');
+
         const content = `
             <h2>${id ? 'Editar' : 'Nuevo'} Socio</h2>
             <form id="form-socio" onsubmit="app.saveSocio(event, ${id})">
                 <input type="text" name="nombre" class="form-input" placeholder="Nombre completo" required>
-                <input type="text" name="avatar" class="form-input" placeholder="Avatar (emoji)" value="👤">
+                
+                <label style="font-size:0.9rem; color:var(--text-secondary); margin-top:10px;">Seleccionar Avatar:</label>
+                <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:10px; margin:10px 0;">
+                    ${avatarOptions}
+                </div>
+                <input type="hidden" name="avatar" id="selected-avatar" value="${AVATARS.avatar3}">
+                
                 <input type="number" name="deuda" class="form-input" placeholder="Deuda inicial" value="0">
                 <div style="display:flex; gap:10px; margin-top:20px;">
                     <button type="submit" class="btn-primary" style="flex:1;">Guardar</button>
@@ -349,13 +429,21 @@ class CajaDeCristalApp {
         document.getElementById('modal-overlay').classList.add('active');
     }
 
+    selectAvatar(url) {
+        document.getElementById('selected-avatar').value = url;
+        document.querySelectorAll('.avatar-option img').forEach(img => {
+            img.style.border = img.src === url ? '3px solid var(--accent-primary)' : 'none';
+        });
+    }
+
     async saveSocio(event, id) {
         event.preventDefault();
         const form = event.target;
         const data = {
             nombre: form.nombre.value,
-            avatar: form.avatar.value || '👤',
-            deuda: parseFloat(form.deuda.value) || 0
+            avatar: form.avatar.value,
+            deuda: parseFloat(form.deuda.value) || 0,
+            fijo: false
         };
 
         if (id) {
