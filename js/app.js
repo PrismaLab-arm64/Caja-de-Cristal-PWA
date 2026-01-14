@@ -19,16 +19,12 @@ class CajaDeCristalApp {
     constructor() {
         this.currentView = 'dashboard';
         this.initialized = false;
-        this.isLoggedIn = false;
     }
 
     async init() {
         if (this.initialized) return;
 
         console.log('🚀 Initializing Caja de Cristal...');
-
-        // Setup login
-        this.setupLogin();
 
         // Initialize database
         await db.init();
@@ -42,30 +38,6 @@ class CajaDeCristalApp {
 
         this.initialized = true;
         console.log('✅ App initialized');
-    }
-
-    setupLogin() {
-        const loginForm = document.getElementById('login-form');
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const pin = document.getElementById('login-pin').value;
-            
-            // PIN configurado (secreto)
-            if (pin === '621808') {
-                this.isLoggedIn = true;
-                document.getElementById('login-screen').classList.remove('active');
-                document.getElementById('splash-screen').classList.add('active');
-                
-                setTimeout(() => {
-                    document.getElementById('splash-screen').classList.remove('active');
-                    document.getElementById('app').style.display = 'block';
-                    this.refreshDashboard();
-                }, 1500);
-            } else {
-                this.showToast('PIN incorrecto', 'error');
-                document.getElementById('login-pin').value = '';
-            }
-        });
     }
 
     async initDefaultSocios() {
@@ -546,6 +518,17 @@ class CajaDeCristalApp {
     }
 }
 
-// Initialize app
+// Initialize app - Acceso directo sin login
 const app = new CajaDeCristalApp();
-window.addEventListener('DOMContentLoaded', () => app.init());
+window.addEventListener('DOMContentLoaded', async () => {
+    await app.init();
+    
+    // Mostrar splash screen por 1.5 segundos
+    document.getElementById('splash-screen').classList.add('active');
+    
+    setTimeout(() => {
+        document.getElementById('splash-screen').classList.remove('active');
+        document.getElementById('app').style.display = 'block';
+        app.refreshDashboard();
+    }, 1500);
+});
