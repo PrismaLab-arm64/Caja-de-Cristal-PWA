@@ -521,14 +521,36 @@ class CajaDeCristalApp {
 // Initialize app - Acceso directo sin login
 const app = new CajaDeCristalApp();
 window.addEventListener('DOMContentLoaded', async () => {
-    await app.init();
-    
-    // Mostrar splash screen por 1.5 segundos
-    document.getElementById('splash-screen').classList.add('active');
-    
-    setTimeout(() => {
-        document.getElementById('splash-screen').classList.remove('active');
-        document.getElementById('app').style.display = 'block';
-        app.refreshDashboard();
-    }, 1500);
+    try {
+        console.log('🚀 Starting app initialization...');
+        
+        // Mostrar splash screen
+        const splashScreen = document.getElementById('splash-screen');
+        const appContainer = document.getElementById('app');
+        
+        console.log('✅ DOM elements found:', {
+            splashScreen: !!splashScreen,
+            appContainer: !!appContainer
+        });
+        
+        splashScreen.classList.add('active');
+        console.log('✅ Splash screen shown');
+        
+        // Initialize app
+        await app.init();
+        console.log('✅ App initialized');
+        
+        // Esperar 1.5 segundos y mostrar app
+        setTimeout(() => {
+            console.log('⏰ Hiding splash, showing app...');
+            splashScreen.classList.remove('active');
+            appContainer.style.display = 'block';
+            app.refreshDashboard();
+            console.log('✅ App ready!');
+        }, 1500);
+        
+    } catch (error) {
+        console.error('❌ CRITICAL ERROR:', error);
+        alert('Error al inicializar la app: ' + error.message);
+    }
 });
