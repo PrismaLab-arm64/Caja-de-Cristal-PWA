@@ -34,6 +34,34 @@
         </div>
     </div>
 
+    <!-- PIN SCREEN -->
+    <div id="pin-screen" class="pin-screen" style="display:none;">
+        <div class="pin-content">
+            <div class="pin-logo-container">
+                <img src="assets/icon.svg" alt="Caja de Cristal" class="pin-logo">
+            </div>
+            <h1 class="pin-title">🔐 Caja de Cristal</h1>
+            <p class="pin-subtitle">Ingresa tu PIN de seguridad</p>
+            
+            <div class="pin-form">
+                <input type="password" 
+                       id="pin-input" 
+                       class="pin-input" 
+                       placeholder="••••••" 
+                       maxlength="6"
+                       inputmode="numeric"
+                       autocomplete="off">
+                <button id="pin-submit" class="pin-button">Ingresar</button>
+                <p id="pin-error" class="pin-error" style="display:none;"></p>
+            </div>
+
+            <div class="pin-footer">
+                <p>Sistema de Tesorería Profesional</p>
+                <p style="font-size:0.8rem; opacity:0.7;">SISTROVIAL.LEGAL</p>
+            </div>
+        </div>
+    </div>
+
     <!-- INSTALL BUTTON (shown if installable) -->
     <button id="btn-install-app" class="btn-install" style="display:none;">
         ⬇️ INSTALAR APLICACIÓN
@@ -59,7 +87,9 @@
             </ul>
             <div class="sidebar-footer">
                 <p>SISTROVIAL.LEGAL</p>
-                <p style="font-size:0.8rem; opacity:0.7;">v1.1.0 Simplificada</p>
+                <p style="font-size:0.75rem; opacity:0.7; margin-top:5px;">v1.3.0 Segura</p>
+                <p style="font-size:0.7rem; opacity:0.6; margin-top:8px;">Desarrollado por<br>Ing. John A. Skinner S.</p>
+                <p style="font-size:0.65rem; opacity:0.5; margin-top:5px;">© 2026 - Uso Propietario</p>
             </div>
         </aside>
 
@@ -85,6 +115,18 @@
                         <div class="kpi-icon">👥</div>
                         <div class="kpi-label">Deuda Socios</div>
                         <div class="kpi-value" id="kpi-deuda-socios">$0</div>
+                    </div>
+                </div>
+
+                <!-- ADVERTENCIA DE BACKUP -->
+                <div class="backup-warning">
+                    <div class="backup-warning-icon">⚠️</div>
+                    <div class="backup-warning-content">
+                        <strong>⚡ IMPORTANTE: Backup de Datos</strong>
+                        <p>Tus datos se guardan localmente en este dispositivo. Realiza copias de seguridad regularmente para evitar pérdida de información.</p>
+                        <button class="btn-backup-now" onclick="sounds.playClick(); app.navigateTo('backup')">
+                            💾 Hacer Backup Ahora
+                        </button>
                     </div>
                 </div>
 
@@ -172,9 +214,10 @@
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Scripts - Versión Simplificada -->
+    <!-- Scripts - Versión Segura -->
     <script src="js/sounds.js"></script>
     <script src="js/db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/app.js"></script>
     <script src="js/install.js"></script>
 
