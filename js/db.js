@@ -38,21 +38,21 @@ class SimpleDatabase {
             { 
                 id: 1,
                 nombre: 'Dr. Ángel Peralta', 
-                avatar: 'https://www.genspark.ai/api/files/s/g4AanUit',
+                avatar: 'https://www.genspark.ai/api/files/s/rEpi5Ize', // Avatar M1
                 deuda: 0,
                 fijo: true
             },
             { 
                 id: 2,
                 nombre: 'Dra. Andrea Cano', 
-                avatar: 'https://www.genspark.ai/api/files/s/mCiinVjN',
+                avatar: 'https://www.genspark.ai/api/files/s/QA8fyjzM', // Avatar F1
                 deuda: 0,
                 fijo: true
             },
             { 
                 id: 3,
                 nombre: 'Dra. Sandra Herrera', 
-                avatar: 'https://www.genspark.ai/api/files/s/2wlTnIKZ',
+                avatar: 'https://www.genspark.ai/api/files/s/izi6k3xe', // Avatar F2
                 deuda: 0,
                 fijo: true
             }

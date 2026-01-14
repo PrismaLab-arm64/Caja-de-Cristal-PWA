@@ -228,15 +228,17 @@ class CajaDeCristalApp {
             } else {
                 list.innerHTML = socios.map(s => {
                     const semaforo = this.getSemaforoSocio(s.deuda);
+                    const deleteButton = !s.fijo ? `<button class="btn-delete-socio" onclick="event.stopPropagation(); app.deleteSocio(${s.id})">🗑️ Eliminar</button>` : '';
                     return `
                         <div class="socio-card" onclick="app.viewSocioDetails(${s.id})">
-                            <img src="${s.avatar}" alt="${s.nombre}" class="socio-avatar">
+                            <img src="${s.avatar}" alt="${s.nombre}" class="socio-avatar" onerror="this.src='assets/icon.svg'">
                             <div class="socio-name">${s.nombre}</div>
                             <div class="socio-deuda">
                                 <div class="semaforo-indicator" style="background:${semaforo.color}"></div>
                                 ${this.formatMoney(s.deuda || 0)}
                             </div>
                             <div class="socio-status">${semaforo.label}</div>
+                            ${deleteButton}
                         </div>
                     `;
                 }).join('');
@@ -248,12 +250,12 @@ class CajaDeCristalApp {
     }
 
     getSemaforoSocio(deuda) {
-        if (deuda === 0) {
-            return { color: '#10b981', label: '🟢 Al Día' };
-        } else if (deuda < 500000) {
-            return { color: '#f59e0b', label: '🟡 Abono Parcial' };
+        if (deuda === 0 || deuda === null || deuda === undefined) {
+            return { color: '#10b981', label: '🟢 Al Día ($0)' };
+        } else if (deuda > 0 && deuda < 500000) {
+            return { color: '#f59e0b', label: '🟡 Abono Parcial ($1 - $499,999)' };
         } else {
-            return { color: '#ef4444', label: '🔴 Pendiente' };
+            return { color: '#ef4444', label: '🔴 Pendiente ($500,000+)' };
         }
     }
 
@@ -283,8 +285,8 @@ class CajaDeCristalApp {
                     <input type="text" id="concepto" required>
                 </div>
                 <div class="form-group">
-                    <label>Monto *</label>
-                    <input type="number" id="monto" min="0" step="1000" required>
+                    <label>Monto (COP) *</label>
+                    <input type="number" id="monto" min="0" step="0.01" placeholder="Ej: 150000 o 150000.50" required>
                 </div>
                 <div class="form-group">
                     <label>Fecha Factura *</label>
@@ -382,20 +384,21 @@ class CajaDeCristalApp {
             <form id="form-socio" class="modal-form">
                 <div class="form-group">
                     <label>Nombre *</label>
-                    <input type="text" id="nombre-socio" required>
+                    <input type="text" id="nombre-socio" placeholder="Nombre completo del socio" required>
                 </div>
                 <div class="form-group">
                     <label>Avatar</label>
                     <select id="avatar-socio">
-                        <option value="https://www.genspark.ai/api/files/s/g4AanUit">Avatar 1</option>
-                        <option value="https://www.genspark.ai/api/files/s/mCiinVjN">Avatar 2</option>
-                        <option value="https://www.genspark.ai/api/files/s/2wlTnIKZ">Avatar 3</option>
-                        <option value="https://www.genspark.ai/api/files/s/Q69eYfDq">Avatar 4</option>
+                        <option value="https://www.genspark.ai/api/files/s/AaX7BoVD">👩 Avatar F3 (Mujer - Azul)</option>
+                        <option value="https://www.genspark.ai/api/files/s/pozM56uz">👩 Avatar F4 (Mujer - Rojo)</option>
+                        <option value="https://www.genspark.ai/api/files/s/Xt5ryLmf">👨 Avatar M2 (Hombre - Azul)</option>
+                        <option value="https://www.genspark.ai/api/files/s/u7gkxVTS">👨 Avatar M3 (Hombre - Beige)</option>
+                        <option value="https://www.genspark.ai/api/files/s/10aGHwc6">👨 Avatar M4 (Hombre - Gris)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Deuda Inicial</label>
-                    <input type="number" id="deuda-socio" min="0" step="1000" value="0">
+                    <label>Deuda Inicial (COP)</label>
+                    <input type="number" id="deuda-socio" min="0" step="0.01" placeholder="0.00" value="0">
                 </div>
                 <button type="submit" class="btn-primary">Guardar Socio</button>
             </form>
@@ -437,6 +440,36 @@ class CajaDeCristalApp {
     viewSocioDetails(id) {
         // Implementation for viewing socio details
         console.log('View socio:', id);
+    }
+
+    async deleteSocio(id) {
+        try {
+            const socios = await db.getSocios();
+            const socio = socios.find(s => s.id === id);
+            
+            if (!socio) {
+                this.showToast('Socio no encontrado', 'error');
+                return;
+            }
+
+            if (socio.fijo) {
+                this.showToast('No se pueden eliminar los socios fijos (Ángel, Andrea, Sandra)', 'error');
+                sounds.playError();
+                return;
+            }
+
+            if (confirm(`¿Estás seguro de eliminar a ${socio.nombre}?`)) {
+                await db.deleteSocio(id);
+                sounds.playSuccess();
+                this.showToast('Socio eliminado correctamente', 'success');
+                await this.refreshSocios();
+                await this.refreshDashboard();
+            }
+        } catch (error) {
+            console.error('Error deleting socio:', error);
+            sounds.playError();
+            this.showToast('Error al eliminar el socio', 'error');
+        }
     }
 
     async exportBackup() {

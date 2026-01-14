@@ -445,6 +445,24 @@ body {
 .socio-status {
     font-size: 0.9rem;
     color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.btn-delete-socio {
+    background: var(--danger);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn-delete-socio:hover {
+    background: #dc2626;
+    transform: scale(1.05);
 }
 
 .semaforo-indicator {
