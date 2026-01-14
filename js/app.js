@@ -50,8 +50,8 @@ class CajaDeCristalApp {
             e.preventDefault();
             const pin = document.getElementById('login-pin').value;
             
-            // PIN por defecto: 1234
-            if (pin === '1234') {
+            // PIN configurado (secreto)
+            if (pin === '621808') {
                 this.isLoggedIn = true;
                 document.getElementById('login-screen').classList.remove('active');
                 document.getElementById('splash-screen').classList.add('active');

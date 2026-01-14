@@ -3,17 +3,19 @@
    Caja de Cristal PWA v1.0.0
    ============================================ */
 
-const CACHE_NAME = 'caja-de-cristal-v1.0.0';
+const CACHE_NAME = 'caja-de-cristal-v1.1.1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/style.css',
-    '/js/app.js',
-    '/js/db.js',
-    '/js/pdf.js',
-    '/js/utils.js',
-    '/js/install.js',
-    '/manifest.json',
+    './',
+    './index.html',
+    './css/style.css',
+    './js/app.js',
+    './js/constants.js',
+    './js/db.js',
+    './js/pdf.js',
+    './js/utils.js',
+    './js/install.js',
+    './manifest.json',
+    './assets/icon.svg',
     'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'
 ];
 
@@ -79,7 +81,7 @@ self.addEventListener('fetch', (event) => {
                     return response;
                 }).catch(() => {
                     // Offline fallback
-                    return caches.match('/index.html');
+                    return caches.match('./index.html');
                 });
             })
     );
