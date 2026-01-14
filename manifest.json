@@ -1,7 +1,7 @@
 {
-  "name": "Caja de Cristal",
+  "name": "Caja de Cristal - Sistema Seguro",
   "short_name": "Caja Cristal",
-  "description": "Sistema de Tesorería Profesional para SISTROVIAL.LEGAL",
+  "description": "Sistema de Tesorería Profesional con Seguridad PIN para SISTROVIAL.LEGAL",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0a0a0a",

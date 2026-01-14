@@ -1,14 +1,16 @@
-# 💎 Caja de Cristal PWA - Versión Simplificada
+# 💎 Caja de Cristal PWA - Versión Segura
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)
 ![PWA](https://img.shields.io/badge/PWA-Ready-green.svg)
+![Security](https://img.shields.io/badge/Security-PIN%20Protected-red.svg)
 ![License](https://img.shields.io/badge/license-Proprietary-red.svg)
 
-**Sistema de Tesorería Profesional - Versión Simplificada y Optimizada**
+**Sistema de Tesorería Profesional con Seguridad PIN**
 
-*Diseñado y desarrollado por **Ing. John A. Skinner S.***
+*Diseñado y desarrollado por **Ing. John A. Skinner S.***  
+*Desarrollado para **SISTROVIAL.LEGAL Peritos & Abogados***
 
 [🌐 Ver Demo](https://prismalab-arm64.github.io/Caja-de-Cristal-PWA/)
 
@@ -16,21 +18,24 @@
 
 ---
 
-## 🚀 Novedades de la Versión 1.1.0 Simplificada
+## 🔐 Novedades de la Versión 1.3.0 - Segura
 
-Esta versión ha sido **auditada, simplificada y optimizada** para garantizar:
+Esta versión incluye **mejoras críticas de seguridad** y advertencias importantes:
 
-- ✅ **Funcionamiento garantizado** - Código simplificado y probado
-- ✅ **Menor tamaño** - Reducción de dependencias innecesarias
-- ✅ **Más rápida** - Uso de localStorage en lugar de IndexedDB
-- ✅ **Más mantenible** - Código más limpio y estructurado
-- ✅ **100% funcional** - Todas las características core implementadas
+- 🔒 **PIN de Seguridad** - Protección con PIN al abrir la app
+- ⏱️ **Auto-lock** - Bloqueo automático después de 5 minutos de inactividad
+- ⚠️ **Advertencia de Backup** - Recordatorio visible en el dashboard
+- 🛡️ **Protección de Datos** - Información financiera protegida
+- ✨ **Socios Fijos Protegidos** - Ángel, Andrea y Sandra no se pueden eliminar
+- 📊 **Semáforo Mejorado** - Rangos de deuda claros
+- 💵 **Valores Decimales** - Montos con centavos
 
-### 📦 Cambios Principales
+### 📦 Cambios de Seguridad
 
-1. **Sistema de almacenamiento simplificado**
-   - Migración de IndexedDB a localStorage
-   - Más simple, más rápido, más confiable
+1. **Sistema de Autenticación con PIN**
+   - PIN requerido al abrir la app
+   - Sesión protegida con timeout
+   - Bloqueo automático por inactividad
    
 2. **Código optimizado**
    - Eliminación de dependencias no esenciales
@@ -208,6 +213,21 @@ caja-de-cristal-pwa/
 
 ## 📝 Changelog
 
+### Versión 1.3.0 - Segura (14 de Enero, 2026)
+- 🔒 Sistema de autenticación con PIN
+- ⏱️ Bloqueo automático por inactividad (5 minutos)
+- ⚠️ Advertencia de backup en dashboard
+- ✨ Avatares corregidos (Ángel, Andrea, Sandra)
+- 🛡️ Protección de socios fijos
+- 📊 Semáforo con rangos de deuda claros
+- 💵 Valores decimales en montos
+
+### Versión 1.2.0 - Mejoras UX (14 de Enero, 2026)
+- ✨ Gestión mejorada de socios
+- ✨ Botón eliminar solo en socios adicionales
+- ✨ 5 avatares adicionales disponibles
+- ✨ Mejor experiencia de usuario
+
 ### Versión 1.1.0 - Simplificada (14 de Enero, 2026)
 - ✨ Migración de IndexedDB a localStorage
 - ✨ Simplificación de código JavaScript
@@ -226,7 +246,7 @@ caja-de-cristal-pwa/
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Desarrollador
 
 <div align="center">
 
@@ -242,6 +262,16 @@ Ingeniero de Software especializado en PWAs y desarrollo móvil
 ---
 
 ## 📄 Licencia
+
+© 2026 **Ing. John A. Skinner S.** - Todos los derechos reservados.
+
+Este software es de **uso propietario** desarrollado para **SISTROVIAL.LEGAL Peritos & Abogados**.
+
+**Términos de uso:**
+- ❌ No se permite la redistribución
+- ❌ No se permite la modificación sin autorización
+- ❌ No se permite el uso comercial sin licencia
+- ✅ Uso exclusivo para SISTROVIAL.LEGAL
 
 © 2026 **Ing. John A. Skinner S.** - Todos los derechos reservados.
 

@@ -3,7 +3,7 @@
    Caja de Cristal PWA v1.1.0 Simplificada
    ============================================ */
 
-const CACHE_NAME = 'caja-de-cristal-v1.1.0-simple';
+const CACHE_NAME = 'caja-de-cristal-v1.3.0-segura';
 const urlsToCache = [
     './',
     './index.html',
@@ -11,6 +11,7 @@ const urlsToCache = [
     './js/sounds.js',
     './js/app.js',
     './js/db.js',
+    './js/auth.js',
     './js/utils.js',
     './js/install.js',
     './manifest.json',
