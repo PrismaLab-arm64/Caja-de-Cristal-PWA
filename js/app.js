@@ -55,6 +55,25 @@ class CajaDeCristalApp {
             this.showSocioModal();
         });
 
+        // Botón Salir (Logout)
+        document.getElementById('btn-logout')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            sounds.playClick();
+            
+            // Cerrar sidebar primero
+            document.getElementById('sidebar').classList.remove('active');
+            
+            // Confirmar salida
+            if (confirm('¿Estás seguro de que deseas salir? Deberás ingresar el PIN nuevamente.')) {
+                sounds.playSuccess();
+                
+                // Llamar al logout del sistema de auth
+                if (typeof auth !== 'undefined') {
+                    auth.logout();
+                }
+            }
+        });
+
         // Backup
         document.getElementById('btn-exportar')?.addEventListener('click', () => {
             sounds.playClick();

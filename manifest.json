@@ -1,7 +1,7 @@
 {
-  "name": "Caja de Cristal - Sistema Seguro",
+  "name": "Caja de Cristal v1.4.0 Final",
   "short_name": "Caja Cristal",
-  "description": "Sistema de Tesorería Profesional con Seguridad PIN para SISTROVIAL.LEGAL",
+  "description": "Sistema de Tesorería Profesional con Seguridad PIN para SISTROVIAL.LEGAL | Desarrollado por Ing. John A. Skinner S.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0a0a0a",
