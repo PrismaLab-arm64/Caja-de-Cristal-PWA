@@ -1,8 +1,8 @@
-# 💎 Caja de Cristal PWA - Versión Segura
+# 💎 Caja de Cristal PWA - Versión Final
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.3.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.4.0-blue.svg)
 ![PWA](https://img.shields.io/badge/PWA-Ready-green.svg)
 ![Security](https://img.shields.io/badge/Security-PIN%20Protected-red.svg)
 ![License](https://img.shields.io/badge/license-Proprietary-red.svg)
@@ -18,11 +18,14 @@
 
 ---
 
-## 🔐 Novedades de la Versión 1.3.0 - Segura
+## ✨ Novedades de la Versión 1.4.0 - Final
 
-Esta versión incluye **mejoras críticas de seguridad** y advertencias importantes:
+Esta versión incluye los **toques finales profesionales** para producción:
 
-- 🔒 **PIN de Seguridad** - Protección con PIN al abrir la app
+- 🏢 **Créditos en Splash** - Titularidad profesional visible (SISTROVIAL.LEGAL)
+- 🚪 **Botón Salir** - Opción para cerrar sesión desde el menú
+- 🆕 **Base de Datos Limpia** - Inicia con valores en cero lista para estrenar
+- 🔒 **PIN de Seguridad** - Protección con PIN al abrir la app (621808)
 - ⏱️ **Auto-lock** - Bloqueo automático después de 5 minutos de inactividad
 - ⚠️ **Advertencia de Backup** - Recordatorio visible en el dashboard
 - 🛡️ **Protección de Datos** - Información financiera protegida

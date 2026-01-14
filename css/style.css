@@ -159,6 +159,38 @@ body {
     margin-top: 10px;
 }
 
+/* Splash Credits - Professional */
+.splash-credits {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+}
+
+.splash-company {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+.splash-tagline {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin: 3px 0 10px 0;
+    opacity: 0.9;
+}
+
+.splash-copyright {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin: 0;
+    opacity: 0.6;
+}
+
 /* ============================================
    INSTALL BUTTON
    ============================================ */
@@ -265,6 +297,18 @@ body {
 .menu-item.active {
     background: var(--bg-card);
     color: var(--accent-primary);
+}
+
+/* Logout button style */
+.menu-item-logout {
+    margin-top: 10px;
+    border-top: 1px solid var(--border);
+    color: var(--danger) !important;
+}
+
+.menu-item-logout:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: var(--danger) !important;
 }
 
 .sidebar-footer {
