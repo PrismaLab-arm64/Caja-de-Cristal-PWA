@@ -16,6 +16,9 @@
     <meta name="apple-mobile-web-app-title" content="Caja de Cristal">
     
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- jsPDF para generación de PDFs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -55,11 +58,12 @@
                 <li><a href="#dashboard" class="menu-item active" data-view="dashboard">📊 Dashboard</a></li>
                 <li><a href="#transacciones" class="menu-item" data-view="transacciones">💰 Transacciones</a></li>
                 <li><a href="#socios" class="menu-item" data-view="socios">👥 Socios</a></li>
+                <li><a href="#reportes" class="menu-item" data-view="reportes">📄 Reportes</a></li>
                 <li><a href="#backup" class="menu-item" data-view="backup">💾 Backup</a></li>
             </ul>
             <div class="sidebar-footer">
                 <p>SISTROVIAL.LEGAL</p>
-                <p style="font-size:0.8rem; opacity:0.7;">v1.1.0 Simplificada</p>
+                <p style="font-size:0.8rem; opacity:0.7;">v1.0.0</p>
             </div>
         </aside>
 
@@ -94,6 +98,9 @@
                     </button>
                     <button class="btn-secondary" onclick="sounds.playClick(); app.navigateTo('socios')">
                         👥 Gestionar Socios
+                    </button>
+                    <button class="btn-secondary" onclick="sounds.playClick(); app.navigateTo('reportes')">
+                        📄 Generar Reporte
                     </button>
                 </div>
 
@@ -137,6 +144,24 @@
                 </div>
             </section>
 
+            <!-- REPORTES VIEW -->
+            <section id="view-reportes" class="view">
+                <h1 class="view-title">Reportes PDF</h1>
+                
+                <div class="report-form">
+                    <label>Seleccionar Mes:</label>
+                    <input type="month" id="report-mes" class="form-input">
+                    
+                    <button class="btn-primary" id="btn-generar-reporte">
+                        📄 Generar Reporte PDF
+                    </button>
+                </div>
+
+                <div id="report-preview" class="report-preview">
+                    <!-- Preview del reporte -->
+                </div>
+            </section>
+
             <!-- BACKUP VIEW -->
             <section id="view-backup" class="view">
                 <h1 class="view-title">Backup y Restauración</h1>
@@ -155,6 +180,7 @@
                 </div>
 
                 <div class="backup-info">
+                    <p><strong>Último backup:</strong> <span id="last-backup">Nunca</span></p>
                     <p><strong>Registros:</strong> <span id="backup-stats">0 transacciones, 0 socios</span></p>
                 </div>
             </section>
@@ -172,10 +198,13 @@
     <!-- TOAST NOTIFICATIONS -->
     <div id="toast-container" class="toast-container"></div>
 
-    <!-- Scripts - Versión Simplificada -->
+    <!-- Scripts -->
     <script src="js/sounds.js"></script>
-    <script src="js/db-simple.js"></script>
-    <script src="js/app-simple.js"></script>
+    <script src="js/constants.js"></script>
+    <script src="js/db.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/pdf.js"></script>
+    <script src="js/app.js"></script>
     <script src="js/install.js"></script>
 
     <script>
