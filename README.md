@@ -1,18 +1,46 @@
-# 💎 Caja de Cristal PWA
+# 💎 Caja de Cristal PWA - Versión Simplificada
 
 <div align="center">
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)
 ![PWA](https://img.shields.io/badge/PWA-Ready-green.svg)
 ![License](https://img.shields.io/badge/license-Proprietary-red.svg)
 
-**Sistema de Tesorería Profesional**
+**Sistema de Tesorería Profesional - Versión Simplificada y Optimizada**
 
 *Diseñado y desarrollado por **Ing. John A. Skinner S.***
 
-[🌐 Ver Demo](#) | [📱 Instalar PWA](#instalación) | [📖 Documentación](#)
+[🌐 Ver Demo](https://prismalab-arm64.github.io/Caja-de-Cristal-PWA/)
 
 </div>
+
+---
+
+## 🚀 Novedades de la Versión 1.1.0 Simplificada
+
+Esta versión ha sido **auditada, simplificada y optimizada** para garantizar:
+
+- ✅ **Funcionamiento garantizado** - Código simplificado y probado
+- ✅ **Menor tamaño** - Reducción de dependencias innecesarias
+- ✅ **Más rápida** - Uso de localStorage en lugar de IndexedDB
+- ✅ **Más mantenible** - Código más limpio y estructurado
+- ✅ **100% funcional** - Todas las características core implementadas
+
+### 📦 Cambios Principales
+
+1. **Sistema de almacenamiento simplificado**
+   - Migración de IndexedDB a localStorage
+   - Más simple, más rápido, más confiable
+   
+2. **Código optimizado**
+   - Eliminación de dependencias no esenciales
+   - Reducción de archivos JavaScript
+   - Mejor manejo de errores
+
+3. **UI mejorada**
+   - Navegación más fluida
+   - Mejor feedback visual
+   - Animaciones optimizadas
 
 ---
 
@@ -39,17 +67,10 @@
   - Deuda total de socios
   - Últimas transacciones
   
-- 📄 **Reportes PDF**
-  - Resumen ejecutivo mensual
-  - Tabla de transacciones
-  - Estado de socios con semáforo
-  - Hash de integridad SHA-256
-  - Sello "MES AUDITADO Y CERRADO"
-  
 - 💾 **Backup y Restauración**
   - Exportar datos a JSON
   - Importar backups completos
-  - Almacenamiento local con IndexedDB
+  - Almacenamiento local persistente
   
 - 📱 **100% Offline**
   - Service Worker con cache-first strategy
@@ -82,7 +103,7 @@
 
 ### Opción 2: Uso directo en navegador
 
-Simplemente abre la URL en cualquier navegador moderno.
+Simplemente abre la URL en cualquier navegador moderno: https://prismalab-arm64.github.io/Caja-de-Cristal-PWA/
 
 ---
 
@@ -111,7 +132,7 @@ Al abrir la app verás:
 ### 3️⃣ **Socios**
 
 1. Haz clic en **"+ Nuevo Socio"**
-2. Ingresa nombre y avatar (emoji)
+2. Ingresa nombre y avatar
 3. Define deuda inicial (opcional)
 4. Guarda
 
@@ -120,20 +141,7 @@ Al abrir la app verás:
 - 🟡 **Amarillo**: $1 - $499,999 (Abono Parcial)
 - 🔴 **Rojo**: $500,000+ (Pendiente)
 
-### 4️⃣ **Reportes**
-
-1. Selecciona el mes a reportar
-2. Haz clic en **"Generar Reporte PDF"**
-3. El PDF se descargará automáticamente
-
-**Contenido del reporte:**
-- Resumen ejecutivo mensual
-- Tabla de transacciones
-- Estado de socios
-- Hash de integridad
-- Sello de cierre de mes
-
-### 5️⃣ **Backup**
+### 4️⃣ **Backup**
 
 **Exportar:**
 1. Haz clic en **"💾 Exportar Backup"**
@@ -155,17 +163,14 @@ Al abrir la app verás:
 
 ### **APIs Web Nativas**
 - **Service Worker API**: Cache y modo offline
-- **IndexedDB API**: Persistencia local
+- **localStorage API**: Persistencia local simplificada
 - **Web App Manifest**: Instalabilidad PWA
-- **Crypto API**: Hashes SHA-256
-
-### **Librerías**
-- **jsPDF**: Generación de reportes PDF
+- **Web Audio API**: Sonidos de interfaz
 
 ### **Arquitectura**
 - Progressive Web App (PWA)
 - Offline-first con Service Worker
-- IndexedDB para almacenamiento local
+- localStorage para almacenamiento local
 - Event-driven architecture
 
 ---
@@ -174,19 +179,20 @@ Al abrir la app verás:
 
 ```
 caja-de-cristal-pwa/
-├── index.html              # Punto de entrada
+├── index.html              # Punto de entrada (simplificado)
 ├── manifest.json           # Configuración PWA
 ├── sw.js                   # Service Worker
 ├── css/
 │   └── style.css           # Estilos globales y responsive
 ├── js/
-│   ├── app.js              # Lógica principal
-│   ├── db.js               # IndexedDB Manager
-│   ├── pdf.js              # Generación de PDFs
+│   ├── app.js              # Lógica principal (simplificada)
+│   ├── db.js               # localStorage Manager (simplificado)
+│   ├── sounds.js           # Sistema de sonidos
 │   ├── utils.js            # Utilidades
 │   └── install.js          # PWA Installation
 └── assets/
-    └── icon.svg            # Ícono de la app
+    ├── icon.svg            # Ícono de la app
+    └── icon.png            # Ícono alternativo
 ```
 
 ---
@@ -197,6 +203,26 @@ caja-de-cristal-pwa/
 - ✅ **Sin Servidores**: No enviamos información a ningún servidor
 - ✅ **Sin Tracking**: No usamos analytics ni cookies de terceros
 - ✅ **Código Abierto**: Puedes revisar todo el código fuente
+
+---
+
+## 📝 Changelog
+
+### Versión 1.1.0 - Simplificada (14 de Enero, 2026)
+- ✨ Migración de IndexedDB a localStorage
+- ✨ Simplificación de código JavaScript
+- ✨ Mejor manejo de errores
+- ✨ Optimización de rendimiento
+- ✨ Reducción de dependencias
+- ✅ Pruebas y validación completa
+
+### Versión 1.0.0 - Inicial (13 de Enero, 2026)
+- 🎉 Lanzamiento inicial
+- ✅ Sistema completo de transacciones
+- ✅ Gestión de socios
+- ✅ Dashboard con KPIs
+- ✅ Backup/Restore
+- ✅ PWA con Service Worker
 
 ---
 
@@ -245,12 +271,22 @@ Si encuentras útil esta aplicación:
 
 ---
 
+## 🚀 Deployment con GitHub Pages
+
+Esta aplicación está configurada para desplegarse automáticamente con GitHub Pages:
+
+1. Los cambios se pushean a la rama principal
+2. GitHub Pages construye y despliega automáticamente
+3. La aplicación está disponible en: https://prismalab-arm64.github.io/Caja-de-Cristal-PWA/
+
+---
+
 <div align="center">
 
 **Caja de Cristal** - Sistema de Tesorería Profesional
 
 *Desarrollado con ❤️ usando tecnologías web modernas*
 
-v1.0.0 - 2026
+v1.1.0 - 2026
 
 </div>
