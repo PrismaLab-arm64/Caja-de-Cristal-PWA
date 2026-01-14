@@ -13,27 +13,60 @@ class AuthSystem {
     }
 
     init() {
-        // Verificar si ya está autenticado en esta sesión
-        const sessionAuth = sessionStorage.getItem('auth');
-        if (sessionAuth === 'true') {
-            this.isAuthenticated = true;
-            this.startTimeout();
-        } else {
-            this.showPinScreen();
-        }
-
-        // Detectar actividad del usuario
-        this.setupActivityListeners();
+        console.log('🔐 Inicializando sistema de autenticación...');
+        
+        // Ocultar splash primero
+        setTimeout(() => {
+            const splash = document.getElementById('splash-screen');
+            if (splash) {
+                splash.style.display = 'none';
+                console.log('✅ Splash ocultado');
+            }
+            
+            // Verificar si ya está autenticado en esta sesión
+            const sessionAuth = sessionStorage.getItem('auth');
+            if (sessionAuth === 'true') {
+                console.log('✅ Usuario ya autenticado');
+                this.isAuthenticated = true;
+                this.hidePinScreen();
+                this.startTimeout();
+                
+                // Inicializar la app
+                if (typeof app !== 'undefined' && app.init) {
+                    app.init();
+                }
+            } else {
+                console.log('🔒 Mostrando pantalla de PIN');
+                this.showPinScreen();
+            }
+            
+            // Detectar actividad del usuario
+            this.setupActivityListeners();
+        }, 1000); // Esperar 1 segundo para que el DOM cargue completamente
     }
 
     showPinScreen() {
         const pinScreen = document.getElementById('pin-screen');
         const app = document.getElementById('app');
-        const splash = document.getElementById('splash-screen');
 
-        if (splash) splash.style.display = 'none';
-        if (app) app.style.display = 'none';
-        if (pinScreen) pinScreen.style.display = 'flex';
+        console.log('📱 Mostrando pantalla PIN');
+        if (app) {
+            app.style.display = 'none';
+            console.log('  - App ocultado');
+        }
+        if (pinScreen) {
+            pinScreen.style.display = 'flex';
+            console.log('  - PIN screen mostrado');
+            
+            // Enfocar el input
+            setTimeout(() => {
+                const pinInput = document.getElementById('pin-input');
+                if (pinInput) {
+                    pinInput.focus();
+                    console.log('  - Input enfocado');
+                }
+            }, 100);
+        }
     }
 
     hidePinScreen() {
