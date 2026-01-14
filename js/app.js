@@ -560,17 +560,26 @@ const app = new CajaDeCristalApp();
 
 // Initialize app when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
-    // Hide splash screen after short delay
+    console.log('🚀 DOM Cargado');
+    
+    // Esperar un poco para que todo esté listo
     setTimeout(() => {
-        document.getElementById('splash-screen').style.display = 'none';
+        console.log('⏰ Iniciando secuencia de carga...');
         
-        // Si hay sistema de auth, mostrar PIN
+        // Siempre usar auth si existe
         if (typeof auth !== 'undefined') {
+            console.log('🔐 Sistema de autenticación detectado');
             auth.init();
         } else {
-            // Si no hay auth, mostrar app directamente
-            document.getElementById('app').style.display = 'block';
-            await app.init();
+            console.log('⚠️ No hay sistema de autenticación');
+            // Si no hay auth, ocultar splash y mostrar app directamente
+            const splash = document.getElementById('splash-screen');
+            if (splash) splash.style.display = 'none';
+            
+            const appEl = document.getElementById('app');
+            if (appEl) appEl.style.display = 'block';
+            
+            app.init();
         }
-    }, 1500);
+    }, 1000);
 });
